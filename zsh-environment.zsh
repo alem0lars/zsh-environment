@@ -73,5 +73,27 @@ export LESS_TERMCAP_us=$'\E[01;32m'    # Begins underline.
 
 # }}}
 
+# In OSX merge the shel PATH with the global PATH (retrieved from launchctl).
+if [[ `uname` == 'Darwin' ]]; then
+path_builder="
+path = (ENV['PATH'] + ':' + \`launchctl getenv PATH\`)
+    .split(':')
+    .map { |p| p.chomp }
+    .uniq
+    .compact
+scores = [
+  ENV['HOME'],
+  '/usr/local/(?![s]?bin)',
+  '/usr/local/bin',
+  '/usr',
+  '/'
+]
+find_score = lambda do |p|
+  scores.find_index { |e| Regexp.new('^' + e).match(p) } || scores.length
+end
+puts path.sort { |p1, p2| find_score[p1] <=> find_score[p2] }.join(':')
+"
+export PATH="$(/usr/bin/ruby -e $path_builder)"
+fi
 
 # vim: set filetype=zsh :
