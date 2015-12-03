@@ -73,6 +73,35 @@ export LESS_TERMCAP_us=$'\E[01;32m'    # Begins underline.
 
 # }}}
 
+# {{{ Aliases and shortcuts
+
+if [[ $OSTYPE == darwin* && $commands[gls] ]]; then
+  alias l="gls --color=auto"
+elif [[ $OSTYPE == linux* ]]; then
+  alias l="ls --color=auto"
+fi
+type l > /dev/null
+if [[ $? -eq 0 ]]; then
+  alias ll="l -lsh"
+  alias la="ll -a"
+fi
+
+alias -g G="| grep"
+alias -g L="| less -r"
+
+if [[ $commands[xclip] ]]; then
+  alias -g C="| xclip -i -selection clipboard"
+elif [[ $commands[pbcopy] ]]; then
+  alias -g C="| pbcopy"
+fi
+if [[ $commands[xclip] ]]; then
+  alias -g P="xclip -o -selection clipboard |"
+elif [[ $commands[pbpaste] ]]; then
+  alias -g P="pbpaste |"
+fi
+
+# }}}
+
 # In OSX merge the shel PATH with the global PATH (retrieved from launchctl).
 if [[ `uname` == 'Darwin' ]]; then
 path_builder="
