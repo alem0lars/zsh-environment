@@ -86,6 +86,8 @@ if [[ $? -eq 0 ]]; then
   alias la="ll -a"
 fi
 
+alias -g E="$EDITOR"
+
 alias -g G="| grep"
 alias -g L="| less -r"
 
@@ -102,7 +104,7 @@ fi
 
 # }}}
 
-# In OSX merge the shel PATH with the global PATH (retrieved from launchctl).
+# In OSX merge the shell PATH with the global PATH (retrieved from launchctl).
 if [[ `uname` == 'Darwin' ]]; then
 path_builder="
 path = (ENV['PATH'] + ':' + \`launchctl getenv PATH\`)
