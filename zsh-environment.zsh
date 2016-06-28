@@ -104,6 +104,8 @@ fi
 
 # }}}
 
+export PATH="${HOME}/.local/bin:${PATH}"
+
 # In OSX merge the shell PATH with the global PATH (retrieved from launchctl).
 if [[ `uname` == 'Darwin' ]]; then
 path_builder="
@@ -126,5 +128,6 @@ puts path.sort { |p1, p2| find_score[p1] <=> find_score[p2] }.join(':')
 "
 export PATH="$(/usr/bin/ruby -e $path_builder)"
 fi
+
 
 # vim: set filetype=zsh :
