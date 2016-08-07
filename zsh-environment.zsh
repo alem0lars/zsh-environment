@@ -104,6 +104,11 @@ fi
 
 # }}}
 
+# {{{ Setup `$PATH`
+
+# Add common paths.
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/bin"
+
 # In OSX merge the shell PATH with the global PATH (retrieved from launchctl).
 if [[ `uname` == 'Darwin' ]]; then
 path_builder="
@@ -126,5 +131,23 @@ puts path.sort { |p1, p2| find_score[p1] <=> find_score[p2] }.join(':')
 "
 export PATH="$(/usr/bin/ruby -e $path_builder)"
 fi
+
+# Remove duplicates.
+if [ -n "$PATH" ]; then
+  old_PATH=$PATH:; PATH=
+  while [ -n "$old_PATH" ]; do
+    x=${old_PATH%%:*}       # the first remaining entry
+    case $PATH: in
+      *:"$x":*) ;;         # already there
+      *) PATH=$PATH:$x;;    # not there yet
+    esac
+    old_PATH=${old_PATH#*:}
+  done
+  PATH=${PATH#:}
+  unset old_PATH x
+fi
+
+# }}}
+
 
 # vim: set filetype=zsh :
