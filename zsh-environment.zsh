@@ -34,6 +34,8 @@
 # }}} ##########################################################################
 
 
+stty -ixon -ixoff
+
 # {{{ General.
 
 setopt BRACE_CCL       # Allow brace character class list expansion.
