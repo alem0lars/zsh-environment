@@ -91,7 +91,7 @@ fi
 function E() {
   local _path="${1}"
 
-  if [[ -z "${_path}" ]] || [[ ! -e "${_path}" ]]; then
+  if [[ -z "${_path}" ]]; then
     ${EDITOR}
   else
     local _owner="$(stat -c '%U' "${_path}")"
@@ -103,8 +103,10 @@ function E() {
       cd "${_workdir}"
     elif [[ -w "${_path}" ]]; then
       "${EDITOR}" "${_path}"
-    else
+    elif [[ -f "${_path}" ]]; then
       sudo -u "${_owner}" ${EDITOR} "${_path}"
+    else
+      "${EDITOR}" "$@"
     fi
   fi
 }
