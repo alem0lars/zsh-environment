@@ -88,28 +88,12 @@ if [[ $? -eq 0 ]]; then
   alias la="ll -a"
 fi
 
-function E() {
-  local _path="${1}"
+if [[ ${commands[sudo]} ]]; then
+  alias -g S="sudo"
+fi
 
-  if [[ -z "${_path}" ]]; then
-    ${EDITOR}
-  else
-    local _owner="$(stat -c '%U' "${_path}")"
-    local _workdir="$(pwd)"
-
-    if [[ -d "${_path}" ]]; then
-      cd "${_path}"
-      "${EDITOR}"
-      cd "${_workdir}"
-    elif [[ -w "${_path}" ]]; then
-      "${EDITOR}" "${_path}"
-    elif [[ -f "${_path}" ]]; then
-      sudo -u "${_owner}" ${EDITOR} "${_path}"
-    else
-      "${EDITOR}" "$@"
-    fi
-  fi
-}
+alias -g E="${EDITOR}"
+alias -g EE="S E"
 
 alias -g G="| grep"
 alias -g L="| less -r"
