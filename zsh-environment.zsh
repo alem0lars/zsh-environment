@@ -42,6 +42,7 @@ setopt BRACE_CCL       # Allow brace character class list expansion.
 setopt COMBINING_CHARS # Combine 0-length punctuation chars with the base char.
 setopt RC_QUOTES       # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
 unsetopt MAIL_WARNING  # Don't print warn msg if a mail file has been accessed.
+setopt INTERACTIVE_COMMENTS # Initial `#` causes that line to be ignored."
 
 # }}}
 
