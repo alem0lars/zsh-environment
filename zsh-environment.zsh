@@ -93,8 +93,8 @@ if [[ ${commands[sudo]} ]]; then
   abbrev-alias S="sudo" # Uppercase because lowercase is abbrev of `fasd`.
 fi
 
-abbrev-alias -f e='printf $(realpath --relative-to=. "${EDITOR}")'
-abbrev-alias -f ee='printf sudo $(realpath --relative-to=. "${EDITOR}")'
+abbrev-alias -f e='printf "$(realpath --relative-to=/usr/bin ${EDITOR})"'
+abbrev-alias -f ee='printf "sudo $(realpath --relative-to=/usr/bin ${EDITOR})"'
 
 abbrev-alias g="| grep"
 abbrev-alias L="| less -r" # Uppercase because lowercase is abbrev of `ls`.
