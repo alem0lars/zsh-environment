@@ -90,24 +90,24 @@ if [[ $? -eq 0 ]]; then
 fi
 
 if [[ ${commands[sudo]} ]]; then
-  alias -g S="sudo"
+  abbrev-alias S="sudo"
 fi
 
-alias -g E="${EDITOR}"
-alias -g EE="S E"
+abbrev-alias E="${EDITOR}"
+abbrev-alias EE="S E"
 
-alias -g G="| grep"
-alias -g L="| less -r"
+abbrev-alias G="| grep"
+abbrev-alias L="| less -r"
 
 if [[ $commands[xclip] ]]; then
-  alias -g C="| xclip -i -selection clipboard"
+  abbrev-alias C="| xclip -i -selection clipboard"
 elif [[ $commands[pbcopy] ]]; then
-  alias -g C="| pbcopy"
+  abbrev-alias C="| pbcopy"
 fi
 if [[ $commands[xclip] ]]; then
-  alias -g P="xclip -o -selection clipboard |"
+  abbrev-alias P="xclip -o -selection clipboard |"
 elif [[ $commands[pbpaste] ]]; then
-  alias -g P="pbpaste |"
+  abbrev-alias P="pbpaste |"
 fi
 
 # }}}
