@@ -90,11 +90,11 @@ if [[ $? -eq 0 ]]; then
 fi
 
 if [[ ${commands[sudo]} ]]; then
-  abbrev-alias S="sudo"
+  abbrev-alias u="sudo"
 fi
 
-abbrev-alias E="${EDITOR}"
-abbrev-alias EE="S E"
+abbrev-alias e="${EDITOR}"
+abbrev-alias ee="sudo ${EDITOR}"
 
 abbrev-alias G="| grep"
 abbrev-alias L="| less -r"
