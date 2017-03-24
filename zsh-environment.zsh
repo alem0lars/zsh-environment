@@ -79,35 +79,35 @@ export LESS_TERMCAP_us=$'\E[01;32m'    # Begins underline.
 # {{{ Aliases and shortcuts
 
 if [[ $OSTYPE == darwin* && $commands[gls] ]]; then
-  alias l="gls --color=auto"
+  abbrev-alias l="gls --color=auto"
 elif [[ $OSTYPE == linux* ]]; then
-  alias l="ls --color=auto"
+  abbrev-alias l="ls --color=auto"
 fi
 type l > /dev/null
 if [[ $? -eq 0 ]]; then
-  alias ll="l -lsh"
-  alias la="ll -a"
+  abbrev-alias ll="l -lsh"
+  abbrev-alias la="ll -a"
 fi
 
 if [[ ${commands[sudo]} ]]; then
-  abbrev-alias u="sudo"
+  abbrev-alias S="sudo" # Uppercase because lowercase is abbrev of `fasd`.
 fi
 
 abbrev-alias e="${EDITOR}"
 abbrev-alias ee="sudo ${EDITOR}"
 
-abbrev-alias G="| grep"
-abbrev-alias L="| less -r"
+abbrev-alias g="| grep"
+abbrev-alias L="| less -r" # Uppercase because lowercase is abbrev of `ls`.
 
 if [[ $commands[xclip] ]]; then
-  abbrev-alias C="| xclip -i -selection clipboard"
+  abbrev-alias c="| xclip -i -selection clipboard"
 elif [[ $commands[pbcopy] ]]; then
-  abbrev-alias C="| pbcopy"
+  abbrev-alias c="| pbcopy"
 fi
 if [[ $commands[xclip] ]]; then
-  abbrev-alias P="xclip -o -selection clipboard |"
+  abbrev-alias p="xclip -o -selection clipboard |"
 elif [[ $commands[pbpaste] ]]; then
-  abbrev-alias P="pbpaste |"
+  abbrev-alias p="pbpaste |"
 fi
 
 # }}}
