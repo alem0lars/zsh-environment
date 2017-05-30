@@ -96,18 +96,18 @@ fi
 abbrev-alias -f e='printf "$(realpath --relative-to=/usr/bin ${EDITOR})"'
 abbrev-alias -f ee='printf "sudo $(realpath --relative-to=/usr/bin ${EDITOR})"'
 
-abbrev-alias g="| grep"
-abbrev-alias L="| less -r" # Uppercase because lowercase is abbrev of `ls`.
+abbrev-alias -g G="| grep"
+abbrev-alias -g L="| less -r" # Uppercase because lowercase is abbrev of `ls`.
 
 if [[ $commands[xclip] ]]; then
-  abbrev-alias c="| xclip -i -selection clipboard"
+  abbrev-alias -g C="| xclip -i -selection clipboard"
 elif [[ $commands[pbcopy] ]]; then
-  abbrev-alias c="| pbcopy"
+  abbrev-alias -g C="| pbcopy"
 fi
 if [[ $commands[xclip] ]]; then
-  abbrev-alias p="xclip -o -selection clipboard |"
+  abbrev-alias P="xclip -o -selection clipboard |"
 elif [[ $commands[pbpaste] ]]; then
-  abbrev-alias p="pbpaste |"
+  abbrev-alias P="pbpaste |"
 fi
 
 # }}}
