@@ -95,6 +95,7 @@ fi
 
 abbrev-alias -f e='printf "$(realpath --relative-to=/usr/bin ${EDITOR})"'
 abbrev-alias -f ee='printf "sudo $(realpath --relative-to=/usr/bin ${EDITOR})"'
+abbrev-alias -g er='nvim -R'
 
 abbrev-alias -g G="| grep"
 abbrev-alias -g L="| less -r" # Uppercase because lowercase is abbrev of `ls`.
