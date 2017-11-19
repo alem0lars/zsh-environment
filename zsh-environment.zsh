@@ -78,6 +78,12 @@ export LESS_TERMCAP_us=$'\E[01;32m'    # Begins underline.
 
 # {{{ Aliases and shortcuts
 
+if [[ $OSTYPE == darwin* ]]; then
+  abbrev-alias o="open"
+elif [[ $OSTYPE == linux* ]]; then
+  abbrev-alias o="xdg-open"
+fi
+
 if [[ $OSTYPE == darwin* && $commands[gls] ]]; then
   abbrev-alias l="gls --color=auto"
 elif [[ $OSTYPE == linux* ]]; then
