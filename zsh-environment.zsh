@@ -85,26 +85,27 @@ elif [[ $OSTYPE == linux* ]]; then
 fi
 
 if [[ $OSTYPE == darwin* && $commands[gls] ]]; then
-  abbrev-alias l="gls --color=auto"
+  alias l="gls --color=auto"
 elif [[ $OSTYPE == linux* ]]; then
-  abbrev-alias l="ls --color=auto"
+  alias l="ls --color=auto"
 fi
 type l > /dev/null
 if [[ $? -eq 0 ]]; then
-  abbrev-alias ll="l -lsh"
-  abbrev-alias la="ll -a"
-fi
-
-if [[ ${commands[sudo]} ]]; then
-  abbrev-alias S="sudo" # Uppercase because lowercase is abbrev of `fasd`.
+  alias ll="l -lshF"
+  alias lr="l -lshFR"
+  alias la="ll -a"
 fi
 
 abbrev-alias -f e='printf "$(realpath --relative-to=/usr/bin $(which ${EDITOR:-vim}))"'
 abbrev-alias -f ee='printf "sudo $(realpath --relative-to=/usr/bin $(which ${EDITOR-vim}))"'
 abbrev-alias -g er='nvim -R'
 
-abbrev-alias -g G="| grep"
+abbrev-alias -g G="| grep --color"
 abbrev-alias -g L="| less -r" # Uppercase because lowercase is abbrev of `ls`.
+abbrev-alias -g GG="2>&1 | grep --color"
+abbrev-alias -g LL="2>&1 | less -r" # Uppercase because lowercase is abbrev of `ls`.
+abbrev-alias -g N="> /dev/null"
+abbrev-alias -g NN="2>&1 > /dev/null"
 
 if [[ $commands[xclip] ]]; then
   abbrev-alias -g C="| xclip -i -selection clipboard"
