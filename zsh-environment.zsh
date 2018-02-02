@@ -1,99 +1,95 @@
-#!/usr/bin/env zsh
-#
-# {{{ File header. #############################################################
-#                                                                              #
-# File informations:                                                           #
-# - Name:    zsh-environment.zsh                                               #
-# - Summary: Sets general shell options and defines environment variables.     #
-# - Authors:                                                                   #
-#   - Alessandro Molari <molari.alessandro@gmail.com> (alem0lars)              #
-#                                                                              #
-# Project informations:                                                        #
-#   - Homepage:        https://github.com/alem0lars/zsh-environment            #
-#   - Getting started: see README.md in the project root folder                #
-#                                                                              #
-# License: Apache v2.0 (see below)                                             #
-#                                                                              #
-################################################################################
-#                                                                              #
-# Licensed to the Apache Software Foundation (ASF) under one more contributor  #
-# license agreements.  See the NOTICE file distributed with this work for      #
-# additional information regarding copyright ownership. The ASF licenses this  #
-# file to you under the Apache License, Version 2.0 (the "License"); you may   #
-# not use this file except in compliance with the License.                     #
-# You may obtain a copy of the License at                                      #
-#                                                                              #
-#   http://www.apache.org/licenses/LICENSE-2.0                                 #
-#                                                                              #
-# Unless required by applicable law or agreed to in writing, software          #
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT    #
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.             #
-# See the License for the specific language governing permissions and          #
-# limitations under the License.                                               #
-#                                                                              #
-# }}} ##########################################################################
+# ─────────────────────────────────────────────────────────────────────────────┐
+#                                                                              │
+# Name:    zsh-environment.zsh                                                 │
+# Summary: Set general shell options and define environment variables.         │
+#                                                                              │
+# Authors:                                                                     │
+#   - Alessandro Molari <molari.alessandro@gmail.com> (alem0lars)              │
+#                                                                              │
+# Project:                                                                     │
+#   - Homepage:        https://github.com/alem0lars/zsh-environment            │
+#   - Getting started: see README.md in the project root folder                │
+#                                                                              │
+# License: Apache v2.0 (see below)                                             │
+#                                                                              │
+# ─────────────────────────────────────────────────────────────────────────────┤
+#                                                                              │
+# Licensed to the Apache Software Foundation (ASF) under one more contributor  │
+# license agreements.  See the NOTICE file distributed with this work for      │
+# additional information regarding copyright ownership. The ASF licenses this  │
+# file to you under the Apache License, Version 2.0 (the "License"); you may   │
+# not use this file except in compliance with the License.                     │
+# You may obtain a copy of the License at                                      │
+#                                                                              │
+#   http://www.apache.org/licenses/LICENSE-2.0                                 │
+#                                                                              │
+# Unless required by applicable law or agreed to in writing, software          │
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT    │
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.             │
+# See the License for the specific language governing permissions and          │
+# limitations under the License.                                               │
+#                                                                              │
+# ─────────────────────────────────────────────────────────────────────────────┘
 
+
+# ─────────────────────────────────────────────────────────────────── General ──
 
 stty stop '' -ixoff -ixon
 
-# {{{ General.
+# Allow brace character class list expansion.
+setopt BRACE_CCL
+ # Combine 0-length punctuation chars with the base char.
+setopt COMBINING_CHARS
+ # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
+setopt RC_QUOTES
+ # Don't print warn msg if a mail file has been accessed.
+unsetopt MAIL_WARNING
+ # Initial `#` causes that line to be ignored.
+setopt INTERACTIVE_COMMENTS
 
-setopt BRACE_CCL       # Allow brace character class list expansion.
-setopt COMBINING_CHARS # Combine 0-length punctuation chars with the base char.
-setopt RC_QUOTES       # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
-unsetopt MAIL_WARNING  # Don't print warn msg if a mail file has been accessed.
-setopt INTERACTIVE_COMMENTS # Initial `#` causes that line to be ignored."
-
-# }}}
-
-# {{{ Smart urls.
+# ──────────────────────────────────────────────────────────────── Smart URLs ──
 
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
-# }}}
+# ────────────────────────────────────────────────────────────────────── Jobs ──
 
-# {{{ Jobs.
+# List jobs in the long format by default.
+setopt LONG_LIST_JOBS
+# Try to resume existing job before creating a new proc.
+setopt AUTO_RESUME
+# Report status of background jobs immediately.
+setopt NOTIFY
+# Don't run all background jobs at a lower priority.
+unsetopt BG_NICE
+# Don't kill jobs on shell exit.
+unsetopt HUP
+# Don't report on jobs when shell exit.
+unsetopt CHECK_JOBS
 
-setopt LONG_LIST_JOBS # List jobs in the long format by default.
-setopt AUTO_RESUME    # Try to resume existing job before creating a new proc.
-setopt NOTIFY         # Report status of background jobs immediately.
-unsetopt BG_NICE      # Don't run all background jobs at a lower priority.
-unsetopt HUP          # Don't kill jobs on shell exit.
-unsetopt CHECK_JOBS   # Don't report on jobs when shell exit.
+# ─────────────────────────────────────────────────────────────────── Termcap ──
 
-# }}}
+# Begins blinking.
+export LESS_TERMCAP_mb=$'\E[01;31m'
+# Begins bold.
+export LESS_TERMCAP_md=$'\E[01;31m'
+# Ends mode.
+export LESS_TERMCAP_me=$'\E[0m'
+# Ends standout-mode.
+export LESS_TERMCAP_se=$'\E[0m'
+# Begins standout-mode.
+export LESS_TERMCAP_so=$'\E[00;47;30m'
+# Ends underline.
+export LESS_TERMCAP_ue=$'\E[0m'
+# Begins underline.
+export LESS_TERMCAP_us=$'\E[01;32m'
 
-# {{{ Termcap.
-
-export LESS_TERMCAP_mb=$'\E[01;31m'    # Begins blinking.
-export LESS_TERMCAP_md=$'\E[01;31m'    # Begins bold.
-export LESS_TERMCAP_me=$'\E[0m'        # Ends mode.
-export LESS_TERMCAP_se=$'\E[0m'        # Ends standout-mode.
-export LESS_TERMCAP_so=$'\E[00;47;30m' # Begins standout-mode.
-export LESS_TERMCAP_ue=$'\E[0m'        # Ends underline.
-export LESS_TERMCAP_us=$'\E[01;32m'    # Begins underline.
-
-# }}}
-
-# {{{ Aliases and shortcuts
+# ──────────────────────────────────────────────────────────── Common Aliases ──
 
 if [[ $OSTYPE == darwin* ]]; then
   abbrev-alias o="open"
 elif [[ $OSTYPE == linux* ]]; then
   abbrev-alias o="xdg-open"
-fi
-
-if [[ $OSTYPE == darwin* && $commands[gls] ]]; then
-  alias l="gls --color=auto"
-elif [[ $OSTYPE == linux* ]]; then
-  alias l="ls --color=auto"
-fi
-type l > /dev/null
-if [[ $? -eq 0 ]]; then
-  alias ll="l -lshF"
-  alias lr="l -lshFR"
-  alias la="ll -a"
 fi
 
 abbrev-alias -f e='printf "$(realpath --relative-to=/usr/bin $(which ${EDITOR:-vim}))"'
@@ -118,9 +114,7 @@ elif [[ $commands[pbpaste] ]]; then
   abbrev-alias P="pbpaste |"
 fi
 
-# }}}
-
-# {{{ Setup `$PATH`
+# ─────────────────────────────────────────────────────────────── Setup $PATH ──
 
 # Add common paths.
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/bin"
@@ -162,8 +156,3 @@ if [ -n "$PATH" ]; then
   PATH=${PATH#:}
   unset old_PATH x
 fi
-
-# }}}
-
-
-# vim: set filetype=zsh :
